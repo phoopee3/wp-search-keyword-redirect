@@ -22,9 +22,9 @@ For further information and instructions please see the plugin page
 
 If you would prefer to do things manually then follow these instructions:
 
-1. Upload the `wordpress-importer` folder to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Go to the Tools -> Import screen, click on WordPress
+1. Upload the `ww-keyword-redirect` folder to the `/wp-content/plugins/` directory
+2. Activate the plugin through the 'Plugins' menu in WordPress
+
 
 == Changelog ==
 
