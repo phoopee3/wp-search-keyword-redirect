@@ -33,6 +33,18 @@ jQuery(function($){
 
 			});
 
+			// User click on delete redirect
+			$('.cancel_changes').on('click',function(e){
+
+				wwkwapp.refresh_page();
+
+				e.preventDefault();
+
+			});
+
+
+			
+
 		},
 
 		delete_redirect: function(el){
@@ -46,6 +58,12 @@ jQuery(function($){
 			var template = $(_.template($('#redirect').html())());
 
 			this.el.redirect_table.append(template);
+
+		},
+
+		refresh_page: function(){
+
+			location.reload();
 
 		}
 

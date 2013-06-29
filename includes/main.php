@@ -169,7 +169,8 @@ if (!class_exists("WW_keyword_redirect")) {
 			</script>
 			
 			<p class="submit">
-			<input type="submit" name="submit_codes" class="button-primary" value="<?php _e('Save Changes') ?>" />
+			<input type="submit" name="submit_codes" class="button-primary" value="<?php _e('Save Changes') ?>" /> 
+			<input type="button" name="cancel_changes" class="button cancel_changes" value="<?php _e('Cancel') ?>" />
 			</p>
 			</form>
 		</div>
@@ -192,7 +193,7 @@ if (!class_exists("WW_keyword_redirect")) {
 						<td><input type="text" name="ww_keyword_redirects[request][]" value="'.$request.'" style="width:15em" />&nbsp;&raquo;&nbsp;</td>
 						<td><input type="text" name="ww_keyword_redirects[destination][]" value="'.$data[0].'" style="width:30em;" /><!--&nbsp;&raquo;&nbsp;--></td>
 						<!-- <td><input type="text" name="ww_keyword_redirects[used][]" value="'.$data[1].'" style="width:10em;" readonly/></td> -->
-						<td><a href="#" class="delete_redirect button" title="Delete Redirect">Delete Redirect<a/></td>
+						<td><a href="#" class="delete_redirect button submitdelete" title="Delete Redirect">Delete Redirect<a/></td>
 					</tr>
 					
 					';
