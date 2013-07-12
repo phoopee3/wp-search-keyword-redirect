@@ -18,13 +18,13 @@
 	<div class="wrap ww-keyword-redirect">
 			<h3><?php _e('Overview'); ?></h3>
 			<p><?php _e('This plugin Matches search queries to keywords. On a match it redirects to specific URLs.'); ?> <br><?php _e('Note, this means any match for a non case-sensative string.');?></p>
-			<p><strong><?php _e('Example'); ?>:</strong> <?php _e('The plugin will redirect with these sample search queries for the keyword "test"'); ?>:</p>
+			<p><strong><?php _e('Example'); ?>:</strong> <?php _e('The plugin will redirect with these sample search queries for the keyword <span class="hl">test</span>'); ?>:</p>
 
 			<ol>
-				<li>test</li>
-				<li>Test</li>
-				<li>Search for test number 450</li>
-				<li>dfsdtestfsdfsd</li>
+				<li><span class="hl">test</span></li>
+				<li><span class="hl">Test</span></li>
+				<li>Search for <span class="hl">test</span> number 450</li>
+				<li>dfsd<span class="hl">test</span>fsdfsd</li>
 			</ol>
 
 			
@@ -42,12 +42,12 @@
 					<tr>
 						<th><?php _e('Keyword'); ?></th>
 						<th><?php _e('URL Destination'); ?></th>
-						<!-- <th>Matches</th> -->
+						
 					</tr>
 					<tr>
-						<td><small>example: 30dayfree</small></td>
-						<td><small>example: <?php echo get_option('home'); ?>/destination-url/</small></td>
-						<!-- <td><small>How many times this redirect has occurred</small></td> -->
+						<td><small><?php _e('example'); ?>: <?php _e('Keyword'); ?> </small></td>
+						<td><small><?php _e('example'); ?>: <?php echo get_option('home'); ?>/destination-url/</small></td>
+						
 					</tr>
 					<?php echo $this->get_keyword_redirects(); ?>
 					
