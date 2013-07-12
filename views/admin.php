@@ -13,7 +13,7 @@
 <div class="wrap">
 
 	<?php // screen_icon(); ?>
-	<h2><?php _e('Search Keywords Redirect'); ?></h2>
+	<h2><?php _e('Search Keyword Redirects'); ?></h2>
 
 	<div class="wrap ww-keyword-redirect">
 			<h3><?php _e('Overview'); ?></h3>
@@ -66,7 +66,7 @@
 			</script>
 			
 			<p class="submit">
-			<?php wp_nonce_field( 'ww_keyword_redirects_nonce' ); ?>
+			<?php wp_nonce_field('ww_submit_save_form', 'ww_keyword_redirects_nonce' ); ?>
 			<input type="submit" name="submit_keywords" class="button-primary" value="<?php _e('Save Changes') ?>" /> 
 			<input type="button" name="cancel_changes" class="button cancel_changes" value="<?php _e('Cancel') ?>" />
 			</p>

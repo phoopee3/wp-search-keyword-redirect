@@ -36,4 +36,9 @@ register_activation_hook( __FILE__, array( 'Search_Keyword_Redirect', 'activate'
 register_deactivation_hook( __FILE__, array( 'Search_Keyword_Redirect', 'deactivate' ) );
 
 // Init
-Search_Keyword_Redirect::get_instance();
+function ww_keyword_redirect_init(){
+	Search_Keyword_Redirect::get_instance();
+}
+
+// Bind to init action
+add_action('init','ww_keyword_redirect_init');

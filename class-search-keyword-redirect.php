@@ -83,9 +83,11 @@ class Search_Keyword_Redirect {
 		// Init code
 		add_action('template_redirect', array($this, 'search_keyword_redirect'));
 
-		// Save code
-		if (isset($_POST['submit_keywords'])) {
+		// If the save button was clicked (post var will exist). Also check nounce.
+		if ( isset( $_POST['submit_keywords'] ) && check_admin_referer( 'ww_submit_save_form', 'ww_keyword_redirects_nonce' ) ) {
+
 			$this->save_keyword_redirects($_POST['ww_keyword_redirects']);
+		
 		}
 
 	}
@@ -286,6 +288,8 @@ class Search_Keyword_Redirect {
 	 */
 	public function save_keyword_redirects($data)
 		{
+			
+
 			$redirects = array();
 			
 			for($i = 0; $i < sizeof($data['request']); ++$i) {
@@ -337,5 +341,12 @@ class Search_Keyword_Redirect {
 			}
 			return $output;
 		}
+
+	public function display_error_notice() {
+   
+    	
+    	return "<div class='error'><p>".__( 'An error has occurred!', 'my-text-domain' )."</p></div>";
+    
+	}
 
 } // END CLASS
