@@ -17,7 +17,7 @@
 
 	<div class="wrap ww-keyword-redirect">
 			<h3><?php _e('Overview'); ?></h3>
-			<p><?php _e('This plugin Matches search queries to keywords. On a match it redirects to specific URLs.'); ?> <br><?php _e('Note, this means any match for a case insensative string.');?></p>
+			<p><?php _e('This plugin Matches search queries to keywords. On a match it redirects to specific URLs.'); ?> <br><?php _e('Note, this means any match for a non case-sensative string.');?></p>
 			<p><strong><?php _e('Example'); ?>:</strong> <?php _e('The plugin will redirect with these sample search queries for the keyword "test"'); ?>:</p>
 
 			<ol>

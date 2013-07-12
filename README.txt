@@ -12,18 +12,20 @@ Matches search queries and to keywords. On match redirect to specific pages.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+With this plugin you can define keywords that redirect to URLs. Some example of usage:
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+1. Optimizing search to get users to desired content fast.
+2. Marketing with search keywords. Much easier for user to remember "search free stuff" than expecting a user to remember/type a URL.
+3. Search keyword easter-eggs. Search "guacamole" -> http://mysite.com/awesome-guac-recipe.
+4. Fun!
 
 == Installation ==
 
 This section describes how to install the plugin and get it working.
 
 Automatic Installation:
-1. Under the "Dashboard" -> "Add New" page search for "search keyword redirect" 
-2. Find the "Search Keyword redirect" plugin and click "Install Now"
+1. Under the `Dashboard` -> `Add New` page search for `search keyword redirect` 
+2. Find the `Search Keyword redirect` plugin and click `Install Now`
 
 Manual Installation:
 1. Upload the `search-keyword-redirect` folder to the `/wp-content/plugins/` directory
@@ -34,15 +36,11 @@ Manual Installation:
 
 = None yet :) =
 
-Post and questions in the support forum
+Please support questions in the support forum
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Screenshot of the Search Keyword Redirect Admin panel
 
 == Changelog ==
 
