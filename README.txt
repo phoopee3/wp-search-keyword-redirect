@@ -21,12 +21,6 @@ With this plugin you can define search keywords that redirect to specified URLs.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-Automatic Installation:
-1. Under the `Dashboard` -> `Add New` page search for `search keyword redirect` 
-2. Find the `Search Keyword redirect` plugin and click `Install Now`
-
 Manual Installation:
 1. Upload the `search-keyword-redirect` folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
