@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: werkpress, nickpelton
+Contributors: Werkpress, nickpelton
 Donate link: http://werkpress.com/plugins
 Tags: search, redirect, keyword
 Requires at least: 3.4
@@ -49,4 +49,8 @@ Please support questions in the support forum
 
 = 0.0.1 =
 * Initial Setup
+
+== Credits ==
+
+- Originally inspired and some code originally borrowed from the Simple 301 Redirects Plugin by scottnelle. Code has been completely re-written since 0.1.0.
 
