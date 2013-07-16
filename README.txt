@@ -30,7 +30,7 @@ Manual Installation:
 
 = None yet :) =
 
-Please support questions in the support forum
+Please direct questions to the support forum
 
 == Screenshots ==
 
