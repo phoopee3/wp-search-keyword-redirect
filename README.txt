@@ -12,7 +12,7 @@ Matches search queries and to keywords. On match redirect to specific pages.
 
 == Description ==
 
-With this plugin you can define keywords that redirect to URLs. Some example of usage:
+With this plugin you can define search keywords that redirect to specified URLs. Some example of usage:
 
 1. Optimizing search to get users to desired content fast.
 2. Marketing with search keywords. Much easier for user to remember "search free stuff" than expecting a user to remember/type a URL.
