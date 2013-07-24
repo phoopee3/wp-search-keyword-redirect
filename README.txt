@@ -44,7 +44,12 @@ Please direct questions to the support forum
 = 0.0.1 =
 * Initial Setup
 
+== Upgrade Notice ==
+
+= 0.1.0 =
+* Refactored plugin for better structure and security
+
 == Credits ==
 
-- Originally inspired and some code originally borrowed from the Simple 301 Redirects Plugin by scottnelle. Code has been completely re-written since 0.1.0.
+Originally inspired and some code originally borrowed from the Simple 301 Redirects Plugin by scottnelle. Code has been completely re-written since 0.1.0.
 
