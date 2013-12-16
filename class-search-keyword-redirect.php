@@ -256,7 +256,8 @@ class Search_Keyword_Redirect {
 			
 				// loop through each keyword
 				foreach ($redirects as $keyword => $redirect) {
-						
+
+
 						// check if keyword exists in search query
 						if (preg_match("/$keyword/i", get_search_query()) == TRUE){ 
 
@@ -348,5 +349,35 @@ class Search_Keyword_Redirect {
     	return "<div class='error'><p>".__( 'An error has occurred!', 'my-text-domain' )."</p></div>";
     
 	}
+
+	/**
+	 * Check the match type selected for this keyword and run the selected match function
+	 * @return booleen True or False for a match
+	 */
+	private function run_match(){
+
+
+
+	}
+
+	/**
+	 * Attempt to match a string exactly to another
+	 * @return [type] [description]
+	 */
+	private function match_exact(){
+
+
+	}
+
+	/**
+	 * Attempt find a string in another
+	 * @return [type] [description]
+	 */
+	private function match_any(){
+
+		(preg_match("/$keyword/i", get_search_query()) == TRUE);
+
+	}
+
 
 } // END CLASS
