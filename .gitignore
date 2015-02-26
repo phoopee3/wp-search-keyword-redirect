@@ -1,1 +1,4 @@
 tests*
+.travis.yml
+bin/
+phpunit.xml
