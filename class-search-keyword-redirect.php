@@ -64,30 +64,28 @@ class Search_Keyword_Redirect {
 	 */
 	private function __construct() {
 
-
-
 		// Load plugin text domain
 		add_action( 'init', array( $this, 'load_plugin_textdomain' ) );
-
+		
 		// Add the options page and menu item.
 		add_action( 'admin_menu', array( $this, 'add_plugin_admin_menu' ) );
-
+		
 		// Load admin style sheet and JavaScript.
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_styles' ) );
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
-
+		
 		// Load public-facing style sheet and JavaScript. None in use... yet
 		// add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_styles' ) );
 		// add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
+		
 		// Init code
-		add_action('template_redirect', array($this, 'search_keyword_redirect'));
+		add_action( 'template_redirect', array( $this, 'search_keyword_redirect' ) );
 
 		// If the save button was clicked (post var will exist). Also check nounce.
 		if ( isset( $_POST['submit_keywords'] ) && check_admin_referer( 'ww_submit_save_form', 'ww_keyword_redirects_nonce' ) ) {
 
-			$this->save_keyword_redirects($_POST['ww_keyword_redirects']);
-		
+			$this->save_keyword_redirects( $_POST['ww_keyword_redirects'] );
+
 		}
 
 	}
@@ -114,13 +112,13 @@ class Search_Keyword_Redirect {
 	 *
 	 * @since    0.1.0
 	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
+	 * @param    boolean $network_wide True if WPMU superadmin uses "Network Activate" action, false if WPMU is disabled or plugin is activated on an individual blog.
 	 */
 	public static function activate( $network_wide ) {
-		
 
-		$ww_keyword_redirects_options = array(); 
-	
+
+		$ww_keyword_redirects_options = array();
+
 		update_option( 'ww_keyword_redirects', $ww_keyword_redirects_options );
 
 	}
@@ -130,7 +128,7 @@ class Search_Keyword_Redirect {
 	 *
 	 * @since    0.1.0
 	 *
-	 * @param    boolean    $network_wide    True if WPMU superadmin uses "Network Deactivate" action, false if WPMU is disabled or plugin is deactivated on an individual blog.
+	 * @param    boolean $network_wide True if WPMU superadmin uses "Network Deactivate" action, false if WPMU is disabled or plugin is deactivated on an individual blog.
 	 */
 	public static function deactivate( $network_wide ) {
 		// No deactivation code
@@ -147,7 +145,7 @@ class Search_Keyword_Redirect {
 		$locale = apply_filters( 'plugin_locale', get_locale(), $domain );
 
 		load_textdomain( $domain, WP_LANG_DIR . '/' . $domain . '/' . $domain . '-' . $locale . '.mo' );
-		load_plugin_textdomain( $domain, FALSE, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+		load_plugin_textdomain( $domain, false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 	}
 
 	/**
@@ -165,7 +163,7 @@ class Search_Keyword_Redirect {
 
 		$screen = get_current_screen();
 		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
-			wp_enqueue_style( $this->plugin_slug .'-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), $this->version );
+			wp_enqueue_style( $this->plugin_slug . '-admin-styles', plugins_url( 'assets/css/admin.css', __FILE__ ), array(), $this->version );
 		}
 
 	}
@@ -185,8 +183,8 @@ class Search_Keyword_Redirect {
 
 		$screen = get_current_screen();
 		if ( $screen->id == $this->plugin_screen_hook_suffix ) {
-			wp_enqueue_script('jquery');
-			wp_enqueue_script('underscore');
+			wp_enqueue_script( 'jquery' );
+			wp_enqueue_script( 'underscore' );
 			wp_enqueue_script( $this->plugin_slug . '-admin-script', plugins_url( 'assets/js/admin.js', __FILE__ ), array( 'jquery' ), $this->version );
 		}
 
@@ -226,7 +224,10 @@ class Search_Keyword_Redirect {
 		// 	array( $this, 'display_plugin_admin_page' )
 		// );
 
-		$this->plugin_screen_hook_suffix = add_menu_page( _('Search Keywords'), _("Search Keywords"), 'manage_options', $this->plugin_slug, array($this,'display_plugin_admin_page'), plugins_url( 'assets/img/icon.png', __FILE__ ) , 30 );
+		$this->plugin_screen_hook_suffix = add_menu_page( __( 'Search Keywords' ), __( "Search Keywords" ), 'manage_options', $this->plugin_slug, array(
+			$this,
+			'display_plugin_admin_page'
+		), plugins_url( 'assets/img/icon.png', __FILE__ ), 30 );
 
 	}
 
@@ -244,41 +245,55 @@ class Search_Keyword_Redirect {
 	 *
 	 * @since    0.1.0
 	 */
-	public function search_keyword_redirect(){
+	public function search_keyword_redirect() {
+
+		if ( ! is_search() ) {
+			return;
+		} // not a search
+
+		// get options
+		$redirects = get_option( 'ww_keyword_redirects' );
+
+		// check if options exist
+		if ( ! empty( $redirects ) ) {
+
+			var_dump($redirects);
+
+			// loop through each keyword
+			foreach ( $redirects as $keyword => $redirect ) {
+				// check if keyword exists in search query
+				if ( true == preg_match( "/$keyword/i", get_search_query() ) ) {
+
+					// increment used count
+					$redirects[$keyword][3]++;
+
+					// redirect to url
+					$is_redirect = true;
+					// exit(); // my work is done here
+				break;
+				}
+			} // end foreach
 			
-		if(!is_search()) return; // not a search
-				
-			// get options
-			$redirects = get_option('ww_keyword_redirects');
-			
-			// check if options exist
-			if (!empty($redirects)) {
-			
-				// loop through each keyword
-				foreach ($redirects as $keyword => $redirect) {
+			if ( $is_redirect ) {
+				// write redirects back with updated count
+				update_option( 'ww_keyword_redirects', $redirects );
 
+				wp_redirect( $redirect[0] );
+				exit;
 
-						// check if keyword exists in search query
-						if (preg_match("/$keyword/i", get_search_query()) == TRUE){ 
-
-								// redirect to url
-								wp_redirect($redirect[0]);
-
-								exit(); // my work is done here
-								
-						}
-								
-				} // end foreach
-				
+			} else {
 				// no keywords matched
-				unset($redirects);
+				unset( $redirects );
+	
 				return;
-			
-			}else{
-
-				return; // no redirects
-			
 			}
+
+
+		} else {
+
+			return; // no redirects
+
+		}
 
 	} // END search_keyword_redirect()
 
@@ -287,26 +302,26 @@ class Search_Keyword_Redirect {
 	 *
 	 * @since    0.1.0
 	 */
-	public function save_keyword_redirects($data)
-		{
-			
+	public function save_keyword_redirects( $data ) {
 
-			$redirects = array();
-			
-			for($i = 0; $i < sizeof($data['request']); ++$i) {
-				$request = trim($data['request'][$i]);
-				$destination = trim($data['destination'][$i]);
-			
-				if ($request == '' && $destination == '') { continue; }
-				else { 
-				
-					$redirects[$request] = array($destination,$date,$max,$used);
-										
-				}
+		$redirects = array();
+
+		for ( $i = 0; $i < sizeof( $data['request'] ); ++ $i ) {
+			$request = trim( $data['request'][ $i ] );
+			$destination = trim( $data['destination'][ $i ] );
+
+			if ( $request == '' && $destination == '' ) {
+				continue;
+			} else {
+				$date = time();
+				$used = 0;
+				$redirects[ $request ] = array( $destination, $date, $max, $used );
+
 			}
-
-			update_option('ww_keyword_redirects', $redirects);
 		}
+
+		update_option( 'ww_keyword_redirects', $redirects );
+	}
 
 
 	/**
@@ -314,70 +329,41 @@ class Search_Keyword_Redirect {
 	 *
 	 * @since    0.1.0
 	 */
-	private function get_keyword_redirects(){
-			$redirects = get_option('ww_keyword_redirects');
-			$output = '';
-			if (!empty($redirects)) {
-				foreach ($redirects as $request => $data) {
-					$output .= '
+	private function get_keyword_redirects() {
+		$redirects = get_option( 'ww_keyword_redirects' );
+		$output    = '';
+		if ( ! empty( $redirects ) ) {
+			foreach ( $redirects as $request => $data ) {
+				$output .= '
 					
 					<tr>
-						<td><input type="text" name="ww_keyword_redirects[request][]" value="'.$request.'" style="width:15em" />&nbsp;&raquo;&nbsp;</td>
-						<td><input type="text" name="ww_keyword_redirects[destination][]" value="'.$data[0].'" style="width:30em;" /><!--&nbsp;&raquo;&nbsp;--></td>
-						<!-- <td><input type="text" name="ww_keyword_redirects[used][]" value="'.$data[1].'" style="width:10em;" readonly/></td> -->
-						<td><a href="#" class="delete_redirect button" title="Delete Redirect">'._('Delete Redirect').'<a/></td>
+						<td><input type="text" name="ww_keyword_redirects[request][]" value="' . $request . '" style="width:15em" />&nbsp;&raquo;&nbsp;</td>
+						<td><input type="text" name="ww_keyword_redirects[destination][]" value="' . $data[0] . '" style="width:30em;" /><!--&nbsp;&raquo;&nbsp;--></td>
+						<td><input type="text" name="ww_keyword_redirects[used][]" value="' . $data[3] . '" style="width:4em;" readonly/></td>
+						<td><a href="#" class="delete_redirect button" title="Delete Redirect">' . __( 'Delete Redirect' ) . '<a/></td>
 					</tr>
 					
 					';
-				}
-			}else{
-				$output .= '
+			}
+		} else {
+			$output .= '
 					
 					<tr>
 						<td><input type="text" name="ww_keyword_redirects[request][]" value="" style="width:15em" />&nbsp;&raquo;&nbsp;</td>
 						<td><input type="text" name="ww_keyword_redirects[destination][]" value="" style="width:30em;" /><!--&nbsp;&raquo;&nbsp;--></td>
-						<!-- <td><input type="text" name="ww_keyword_redirects[used][]" value="" style="width:10em;" readonly/></td> -->
-						<td><a href="#" class="delete_redirect button" title="Delete Redirect">'._('Delete Redirect').'<a/></td>
+						<td><input type="text" name="ww_keyword_redirects[used][]" value="" style="width:4em;" readonly/></td> -->
+						<td><a href="#" class="delete_redirect button" title="Delete Redirect">' . __( 'Delete Redirect' ) . '<a/></td>
 					</tr>';
-			}
-			return $output;
 		}
 
+		return $output;
+	}
+
 	public function display_error_notice() {
-   
-    	
-    	return "<div class='error'><p>".__( 'An error has occurred!', 'my-text-domain' )."</p></div>";
-    
-	}
-
-	/**
-	 * Check the match type selected for this keyword and run the selected match function
-	 * @return booleen True or False for a match
-	 */
-	private function run_match(){
 
 
+		return '<div class="error"><p>' . __( 'An error has occurred!', 'my-text-domain' ) . '</p></div>';
 
 	}
-
-	/**
-	 * Attempt to match a string exactly to another
-	 * @return [type] [description]
-	 */
-	private function match_exact(){
-
-
-	}
-
-	/**
-	 * Attempt find a string in another
-	 * @return [type] [description]
-	 */
-	private function match_any(){
-
-		(preg_match("/$keyword/i", get_search_query()) == TRUE);
-
-	}
-
 
 } // END CLASS

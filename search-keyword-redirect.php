@@ -5,10 +5,10 @@
  * 
  *
  * @package   Search_Keyword_Redirect
- * @author    Nick Pelton <nick@werkpress.com>
+ * @author    Nick Pelton <nick@press75.com>
  * @license   GPL-2.0+
- * @link      http://werkpress.com/plugin
- * @copyright 2013 Nick Pelton & Werkpress
+ * @link      http://press75.com/
+ * @copyright 2013 Nick Pelton & Pres75
  *
  * @wordpress-plugin
  * Plugin Name: Search Keyword Redirect
@@ -16,7 +16,7 @@
  * Description: Matches search queries and to keywords. On match redirect to specific pages.
  * Version:     1.0
  * Author:      Nick Pelton
- * Author URI:  http://werkpress.com/plugins
+ * Author URI:  http://press75.com
  * Text Domain: search-keyword-redirect-locale
  * License:     GPL-2.0+
  * License URI: http://www.gnu.org/licenses/gpl-2.0.txt
@@ -41,4 +41,4 @@ function ww_keyword_redirect_init(){
 }
 
 // Bind to init action
-add_action('init','ww_keyword_redirect_init');
+add_action( 'init','ww_keyword_redirect_init' );
